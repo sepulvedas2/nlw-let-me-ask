@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg'
 
 import { Button } from '../components'
 
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks';
 
 import '../styles/auth.scss'
 
