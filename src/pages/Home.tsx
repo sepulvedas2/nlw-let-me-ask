@@ -7,6 +7,7 @@ import google from '../assets/google-icon.svg';
 import { Button } from '../components';
 
 import { useAuth } from '../hooks';
+import { FormEvent } from 'react';
 
 import '../styles/auth.scss'
 
@@ -19,6 +20,10 @@ export function Home () {
             await signInWithGoogle()
         }
         history.push('/rooms/new');
+    }
+
+    async function enterRoom(event: FormEvent){
+        event.preventDefault();
     }
     return (
         <div id="page-auth">
@@ -35,7 +40,7 @@ export function Home () {
                         Crie sua sala com o Google
                     </button>
                     <div className="separator">ou entre em uma sala</div>
-                    <form>
+                    <form onSubmit={enterRoom}>
                         <input 
                             type="text"
                             placeholder="Digite o código da sala"
