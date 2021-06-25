@@ -103,6 +103,8 @@
         cursor: pointer;
         border: 0;
 
+        transition: filter 0.2s;
+
         img {
             margin-right: 8px;
         }
