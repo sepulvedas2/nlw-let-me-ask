@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
 import { Button, RoomCode, Question } from '../components'
-import { useAuth, useRoom } from '../hooks';
+import { useRoom } from '../hooks';
 
 import '../styles/room.scss'
 
