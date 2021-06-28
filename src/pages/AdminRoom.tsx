@@ -1,7 +1,9 @@
 
 import { useParams } from 'react-router-dom';
+import { database } from '../services/firebase';
 
 import logo from '../assets/logo.svg';
+import deleteImg from '../assets/delete.svg';
 
 import { Button, RoomCode, Question } from '../components'
 import { useRoom } from '../hooks';
@@ -20,6 +22,12 @@ export function AdminRoom() {
 
     const {title, questions} = useRoom(roomId);
 
+    async function handleDeleteQuestion(questionId: string) {
+        if( window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+        }
+    }
+
     return (
         <div id="page-room">
             <header>
@@ -37,11 +45,21 @@ export function AdminRoom() {
                 </div>
                 <div className="question-list">
                     {questions.map((question, i) => {
-                        return (<Question
+                        return (
+                        <Question
                             key={question.id}
                             content={question.content}
                             author={question.author}
-                        />)
+                        >
+                            <button
+                                className="admin-icons"
+                                type="button"
+                                onClick={() => handleDeleteQuestion(question.id)}
+                            >
+                                <img src={deleteImg} alt="Remover pergunta" />
+                            </button>
+                        </Question>
+                        );
                     })}
                 </div>
             </main>

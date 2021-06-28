@@ -39,6 +39,13 @@
             background: transparent;
             transition: filter 0.2s;
 
+            &.admin-icons { 
+                height: 30px;
+                padding: 0;
+                grid-gap: 8px;
+                gap: 8px;
+                align-items: flex-end;
+            }
             &.like-button {
                 display: flex;
                 align-items: flex-end;
