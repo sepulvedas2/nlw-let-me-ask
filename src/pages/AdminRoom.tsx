@@ -1,5 +1,5 @@
 
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { database } from '../services/firebase';
 
 import logo from '../assets/logo.svg';
@@ -21,6 +21,18 @@ export function AdminRoom() {
     const roomId = params.id;
 
     const {title, questions} = useRoom(roomId);
+    const history = useHistory();
+
+    async function handleEndRoom(roomId: string) {
+
+        if( window.confirm('Tem certeza que você deseja deletar esta sala?')) {
+            database.ref(`rooms/${roomId}`).update({
+                endedAt: new Date(),
+            })
+    
+            history.push('/');
+        }
+    }
 
     async function handleDeleteQuestion(questionId: string) {
         if( window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
@@ -35,7 +47,7 @@ export function AdminRoom() {
                     <img src={logo} alt="Logo da Letmeask"/>
                     <div>
                     <RoomCode code={roomId}></RoomCode>
-                    <Button isOutlined>Encerrar sala</Button></div>
+                    <Button isOutlined onClick={() => {handleEndRoom(roomId)}}>Encerrar sala</Button></div>
                 </div>
             </header>
             <main>

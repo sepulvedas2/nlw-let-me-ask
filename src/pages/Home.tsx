@@ -38,6 +38,11 @@ export function Home () {
             return;
         }
 
+        if (roomRef.val().endedAt) {
+            alert('Room has been deleted.');
+            return;
+        }
+
         history.push(`/rooms/${roomCode}`);
     }
     return (
