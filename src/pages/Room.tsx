@@ -23,7 +23,7 @@ export function Room() {
 
     const {title, questions} = useRoom(roomId);
 
-    async function handleCreateRoom() {
+    async function handleLogin() {
         if (!user){
             await signInWithGoogle()
         }
@@ -57,6 +57,7 @@ export function Room() {
             await database.ref(`rooms/${roomId}/questions/${questionId}/likes/${likeId}`).remove()
         }else{
             await database.ref(`rooms/${roomId}/questions/${questionId}/likes`).push({
+                //TODO: permitir que usuario nao logado dê like?
                 authorId: user?.id,
             })
         }
@@ -89,7 +90,7 @@ export function Room() {
                                 <span>{user.name}</span>
                             </div>
                         ) : (
-                            <span>Para enviar uma pergunta, <button onClick={handleCreateRoom}>faça seu login.</button></span>
+                            <span>Para enviar uma pergunta, <button onClick={handleLogin}>faça seu login.</button></span>
                         ) }
                         <Button type="submit" disabled={!user} >Enviar pergunta</Button>
                     </div>
