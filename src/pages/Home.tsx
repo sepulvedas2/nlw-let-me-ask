@@ -21,7 +21,7 @@ export function Home () {
         if (!user){
             await signInWithGoogle()
         }
-        history.push('/rooms/new');
+        history.push('/admin/rooms/new');
     }
 
     async function enterRoom(event: FormEvent){

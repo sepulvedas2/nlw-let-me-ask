@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import logo from '../assets/logo.svg';
 
@@ -18,6 +18,7 @@ export function Room() {
     const { user, signInWithGoogle } = useAuth();
     const params = useParams<RoomParams>();
     const [newQuestion, setNewQuestion] = useState('');
+    const history = useHistory();
 
     const roomId = params.id;
 
@@ -67,7 +68,7 @@ export function Room() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <img src={logo} alt="Logo da Letmeask"/>
+                    <img src={logo} alt="Logo da Letmeask" onClick={() => history.push('/')}/>
                     <RoomCode code={roomId}></RoomCode>
                 </div>
             </header>
